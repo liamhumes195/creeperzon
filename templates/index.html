@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172b3a">
+  <title>Creeperzon Market — good finds, delivered</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <a class="brand" href="#" aria-label="Creeperzon Market home">
+        <span class="brand-mark" aria-hidden="true">c</span>
+        <span>creeperzon<span class="brand-dot">.</span></span>
+      </a>
+      <div class="delivery-note"><span class="pin-icon" aria-hidden="true">⌖</span><span>Thoughtful finds<br><strong>delivered to your door</strong></span></div>
+      <form class="search" id="search-form" role="search">
+        <label class="sr-only" for="search-input">Search products</label>
+        <input id="search-input" type="search" placeholder="Search something good..." autocomplete="off">
+        <button type="submit" aria-label="Search">⌕</button>
+      </form>
+      <div class="header-actions">
+        <button class="header-link" id="orders-button" type="button"><span aria-hidden="true">▤</span><span>Orders</span></button>
+        <button class="cart-button" id="cart-button" type="button" aria-label="Open shopping bag">
+          <span class="cart-symbol" aria-hidden="true">▱</span><span class="cart-label">Bag</span><span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="category-nav" aria-label="Product categories">
+      <div class="nav-inner">
+        <span class="nav-caption">EXPLORE</span>
+        <button class="category-link is-active" type="button" data-category="All">Everything</button>
+        <button class="category-link" type="button" data-category="Electronics">Electronics</button>
+        <button class="category-link" type="button" data-category="Home">Home</button>
+        <button class="category-link" type="button" data-category="Accessories">Accessories</button>
+        <span class="nav-promo">A little something for every day <span aria-hidden="true">✳</span></span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> A better kind of everyday shopping</span>
+        <h1 id="hero-title">Good things.<br><span>Found here.</span></h1>
+        <p>Useful little upgrades, lovely everyday essentials, and the occasional just-because.</p>
+        <a class="hero-cta" href="#shop">Find your next favorite <span aria-hidden="true">↗</span></a>
+        <div class="hero-trust"><span aria-hidden="true">✦ ✦ ✦ ✦ ✦</span><span>Made for the everyday good stuff</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=90" alt="">
+        <div class="floating-note"><span class="note-star">✳</span><span>Small finds,<br><strong>big happy.</strong></span></div>
+        <span class="art-caption">THE LITTLE THINGS COLLECTION — NO. 04</span>
+      </div>
+      <div class="hero-index" aria-hidden="true">01 <span></span> 03</div>
+    </section>
+
+    <section class="benefits" aria-label="Shopping benefits">
+      <div><span class="benefit-icon">↗</span><span><strong>Easy everyday shopping</strong><small>Good finds, without the fuss</small></span></div>
+      <div><span class="benefit-icon">♡</span><span><strong>Picked with a little care</strong><small>Useful, lovely, and made to last</small></span></div>
+      <div><span class="benefit-icon">⌁</span><span><strong>Right to your doorstep</strong><small>A smoother way to shop</small></span></div>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="section-heading">
+        <div><span class="eyebrow section-eyebrow">THE GOOD STUFF</span><h2 id="shop-title">A few things we love<span>.</span></h2></div>
+        <span class="product-count" id="product-count"></span>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite">
+        <div class="loading-state">Finding the good stuff...</div>
+      </div>
+      <div class="empty-state" id="empty-state" hidden>No products match that search. Try another one.</div>
+    </section>
+
+    <section class="newsletter">
+      <span class="newsletter-spark" aria-hidden="true">✳</span>
+      <div><span class="eyebrow">A NOTE FROM US</span><h2>Good things are<br>worth sharing.</h2><p>Find something you love? Send a little happy someone else's way.</p></div>
+      <a href="#shop" class="newsletter-link">Keep exploring <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true">c</span><span>creeperzon<span class="brand-dot">.</span></span></a>
+    <span>Good finds for good days.</span>
+    <span class="footer-copy">© 2026 Creeperzon Market</span>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="side-panel" id="cart-panel" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="panel-header"><div><span class="eyebrow">YOUR GOOD FINDS</span><h2 id="cart-title">Shopping bag</h2></div><button class="icon-button close-panel" type="button" aria-label="Close shopping bag">×</button></div>
+    <div class="panel-content" id="cart-content"></div>
+    <div class="panel-footer" id="cart-footer"></div>
+  </aside>
+  <aside class="side-panel orders-panel" id="orders-panel" aria-labelledby="orders-title" aria-hidden="true">
+    <div class="panel-header"><div><span class="eyebrow">STORE MANAGEMENT</span><h2 id="orders-title">Incoming orders</h2></div><button class="icon-button close-panel" type="button" aria-label="Close orders">×</button></div>
+    <div class="panel-content" id="orders-content"></div>
+  </aside>
+
+  <dialog class="checkout-dialog" id="checkout-dialog" aria-labelledby="checkout-title">
+    <form class="checkout-form" id="checkout-form">
+      <div class="dialog-heading"><div><span class="eyebrow">ALMOST YOURS</span><h2 id="checkout-title">Where should we send it?</h2></div><button class="icon-button" id="close-checkout" type="button" aria-label="Close checkout">×</button></div>
+      <p class="checkout-explainer">Add your delivery details to place your order. This demo does not collect payment.</p>
+      <label for="customer-name">Your name</label><input id="customer-name" name="customer_name" autocomplete="name" required maxlength="120">
+      <label for="customer-email">Email address</label><input id="customer-email" name="email" type="email" autocomplete="email" required maxlength="254">
+      <label for="customer-address">Delivery address</label><textarea id="customer-address" name="address" autocomplete="street-address" required maxlength="500" rows="3"></textarea>
+      <p class="form-error" id="checkout-error" role="alert"></p>
+      <button class="primary-button" id="place-order" type="submit">Place my order <span aria-hidden="true">→</span></button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
